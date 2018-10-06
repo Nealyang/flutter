@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 class MyAppBar extends StatelessWidget{
   MyAppBar({this.title});//
   final Widget title;
-
   @override
   Widget build(BuildContext context){
     return new Container(
