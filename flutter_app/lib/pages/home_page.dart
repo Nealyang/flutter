@@ -1,9 +1,45 @@
 import 'package:flutter/material.dart';
 
-import './second_page.dart';
+import './drawer_page.dart';
+import './TopTabPage/TopTabPage_1.dart';
+import './TopTabPage/TopTabPage_2.dart';
+import './TopTabPage/TopTabPage_3.dart';
+import './TopTabPage/TopTabPage_4.dart';
 
-class HomePage extends StatelessWidget{
+class HomePage extends StatefulWidget{
+  @override 
+  _HomePageState createState()=>new _HomePageState();
+}
+//用于使用到了一点点的动画效果，因此加入了SingleTickerProviderStateMixin
+class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
+
+  TabController _tabController;
+
+// 底部bar
+  final List<Tab> _bottomTabs = <Tab>[
+    new Tab(text:'home',icon:new Icon(Icons.home)),
+    new Tab(text:'book',icon:new Icon(Icons.book)),
+    new Tab(text:'movie',icon:new Icon(Icons.movie)),
+    new Tab(text:'music_video',icon:new Icon(Icons.music_video)),
+  ];
+
+
   @override
+  void initState(){
+    super.initState();
+    _tabController = new TabController(
+      vsync:this,
+      length:_bottomTabs.length
+    );
+  }
+
+  @override
+  void dispose(){
+    _tabController .dispose();
+    super.dispose();
+  }
+
+ @override
   Widget build (BuildContext context){
     return new Scaffold(
       appBar:new AppBar(
@@ -11,64 +47,26 @@ class HomePage extends StatelessWidget{
         backgroundColor:Colors.blue[400]
       ),
       drawer: new Drawer(
-        child: new ListView(
-          children:<Widget>[
-            new UserAccountsDrawerHeader(
-              accountName: new Text('Nealyang'),
-              accountEmail: new Text('isNealyang@outlook.com'),
-              currentAccountPicture: new GestureDetector(//用户头像
-                onTap: ()=>print('点击头像'),
-                child: new CircleAvatar(
-                  backgroundImage:new NetworkImage('https://img.alicdn.com/tfs/TB1he8KgxTpK1RjSZFKXXa2wXXa-1629-1080.jpg')
-                ),
-              ),
-              otherAccountsPictures:<Widget>[
-                new GestureDetector(
-                  onTap:()=>print('点击粉丝头像'),
-                  child:new CircleAvatar(
-                    backgroundImage:new NetworkImage('https://img.alicdn.com/tfs/TB1spY7fW6qK1RjSZFmXXX0PFXa-500-504.png')
-                  )
-                ),
-                new GestureDetector(
-                  onTap:()=>print('点击粉丝头像'),
-                  child:new CircleAvatar(
-                    backgroundImage:new NetworkImage('https://img.alicdn.com/tfs/TB148sWfMHqK1RjSZFgXXa7JXXa-536-482.png')
-                  )
-                ),
-                new GestureDetector(
-                  onTap:()=>print('点击粉丝头像'),
-                  child:new CircleAvatar(
-                    backgroundImage:new NetworkImage('https://img.alicdn.com/tfs/TB1XD.ZuYwrBKNjSZPcXXXpapXa-255-251.png')
-                  )
-                ),
-              ],
-              decoration: new BoxDecoration(
-                image:new DecorationImage(
-                  fit:BoxFit.cover,
-                  image:new ExactAssetImage('images/bg.JPG')
-                )
-              ),
-            ),
-            new ListTile(
-              title:new Text('second page'),
-              trailing:new Icon(Icons.arrow_right),
-              onTap: (){
-                Navigator.of(context).pop();
-                Navigator.of(context).push(new MaterialPageRoute(builder: (BuildContext context) => new SecondPage(title:'Second Page')));
-              },
-            ),
-            new Divider(),
-            new ListTile(
-              title:new Text('Close'),
-              trailing:new Icon(Icons.cancel),
-              onTap:()=>Navigator.of(context).pop()
-            )
-          ]
-        ),
+        child: new DrawerPage(),
       ),
-      body: new Center(
-        child:new Text('Home Page',style:new TextStyle(fontSize:35.0))
+      body: new TabBarView(
+        controller:_tabController,
+        children: <Widget>[
+          new TabPage1(data:'参数值'),
+          new TabPage2(),
+          new TabPage3(),
+          new TabPage4(),
+        ],
+      ),
+      bottomNavigationBar: new Material(
+        color:Colors.lightBlueAccent,
+        child:new TabBar(
+          controller:_tabController,
+          tabs:_bottomTabs,
+          indicatorColor:Colors.white,//tab标签下划线颜色
+        )
       ),
     );
   }
+
 }
