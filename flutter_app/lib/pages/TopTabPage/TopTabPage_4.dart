@@ -10,9 +10,30 @@ class TabPage4 extends StatelessWidget {
             backgroundColor: Colors.orangeAccent,
             title: new TabBar(
               tabs: [
-                new Tab(icon: new Icon(Icons.directions_car)),
-                new Tab(icon: new Icon(Icons.directions_transit)),
-                new Tab(icon: new Icon(Icons.directions_bike)),
+                new Tab(
+                  child:new Column(
+                    children:<Widget>[
+                      new Icon(Icons.directions_car),
+                      new Text('Car')
+                    ]
+                  )
+                ),
+                new Tab(
+                  child:new Column(
+                    children:<Widget>[
+                      new Icon(Icons.directions_transit),
+                      new Text('transit')
+                    ]
+                  )
+                ),
+                new Tab(
+                  child:new Column(
+                    children:<Widget>[
+                      new Icon(Icons.directions_bike),
+                      new Text('bike')
+                    ]
+                  )
+                ),
               ],
               indicatorColor: Colors.white,
             ),
