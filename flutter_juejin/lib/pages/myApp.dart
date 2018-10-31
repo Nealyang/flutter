@@ -11,7 +11,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
-  int _tabIndex = 0;
   final TextStyle tabTextStyleNormal =
       TextStyle(color: const Color(0xffdddddd));
   final TextStyle tabTextStyleSelected =
@@ -45,8 +44,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _tabController =
-        new TabController(vsync: this, length: _bottomTabs.length);
+    _tabController = new TabController(vsync: this, length: _bottomTabs.length);
   }
 
   @override
@@ -55,16 +53,34 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  var _body;
-  List _appBarTitles = ['首页', '沸点', '小册', '开源库', '活动'];
   @override
   Widget build(BuildContext context) {
     return Container(
       child: MaterialApp(
-        theme: ThemeData(primaryColor: const Color.fromRGBO(77, 145, 253, 1.0)),
+        theme: ThemeData(
+          primaryColor: const Color.fromRGBO(77, 145, 253, 1.0),
+        ),
         home: Scaffold(
           appBar: AppBar(
-            title: Text('Title'),
+            leading: Image.asset(
+              'images/logo.png',
+            ),
+            backgroundColor: Colors.white,
+            title: Text('Flutter 版 web 掘金'),
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    print('登陆');
+                  },
+                  child: Text(
+                    '登陆 . 注册',
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w200,
+                    ),
+                  ))
+            ],
           ),
           body: TabBarView(
             controller: _tabController,
