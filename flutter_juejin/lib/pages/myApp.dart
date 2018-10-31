@@ -59,6 +59,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
       child: MaterialApp(
         theme: ThemeData(
           primaryColor: const Color.fromRGBO(77, 145, 253, 1.0),
+          accentColor: const Color(0xFFB2BAC2),
         ),
         home: Scaffold(
           appBar: AppBar(
