@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../model/indexCell.dart';
-import './inTextDot.dart';
-import './goodAnCommentCell.dart';
+import './in_text_dot.dart';
+import './good_and_comment_cell.dart';
+import '../routers/application.dart';
+import 'dart:core';
 
 class IndexListCell extends StatelessWidget {
   final IndexCell cellInfo;
@@ -53,38 +55,44 @@ class IndexListCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            height: 20.0,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: _buildFirstRow(),
-            ),
-          ),
-          Container(
-            margin: const EdgeInsets.symmetric(vertical: 9.0),
-            child: Text(
-              cellInfo.title,
-              style: TextStyle(
-                color: Color(0xFF393C3F),
-                fontSize: 14.0,
-                fontWeight: FontWeight.w600,
+    return InkWell(
+      onTap: () {
+        print('跳转到详情页');
+        Application.router.navigateTo(context, "/detail?id=${Uri.encodeComponent(cellInfo.detailUrl)}&title=${Uri.encodeComponent(cellInfo.title)}");
+      },
+      child: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              height: 20.0,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: _buildFirstRow(),
               ),
-              overflow: TextOverflow.ellipsis,
             ),
-          ),
-          GoodAndCommentCell(cellInfo.collectionCount, cellInfo.commentCount),
-          SizedBox(
-            height: 15.0,
-          ),
-          Divider(
-            height: 2.0,
-          ),
-        ],
+            Container(
+              margin: const EdgeInsets.symmetric(vertical: 9.0),
+              child: Text(
+                cellInfo.title,
+                style: TextStyle(
+                  color: Color(0xFF393C3F),
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w600,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            GoodAndCommentCell(cellInfo.collectionCount, cellInfo.commentCount),
+            SizedBox(
+              height: 15.0,
+            ),
+            Divider(
+              height: 2.0,
+            ),
+          ],
+        ),
       ),
     );
   }

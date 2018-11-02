@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../widgets/indexListCell.dart';
+import '../widgets/index_list_cell.dart';
 import '../util/dataUtils.dart';
 import '../model/indexCell.dart';
-import '../widgets/indexListHeader.dart';
+import '../widgets/index_list_header.dart';
 
 class IndexPage extends StatefulWidget {
   _IndexPageState createState() => _IndexPageState();

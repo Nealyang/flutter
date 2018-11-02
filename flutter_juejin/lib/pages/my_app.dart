@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:fluro/fluro.dart';
 
-import './indexPage.dart';
-import './pinsPage.dart';
-import './bookPage.dart';
-import './reposPage.dart';
-import './activityPage.dart';
+import './index_page.dart';
+import './pins_page.dart';
+import './book_page.dart';
+import './repos_page.dart';
+import './activity_page.dart';
+import '../routers/routes.dart';
+import '../routers/application.dart';
 
 class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+  _MyAppState() {
+    final router = new Router();
+    Routes.configureRoutes(router);
+    Application.router = router;
+  }
+
   final TextStyle tabTextStyleNormal =
       TextStyle(color: const Color(0xffdddddd));
   final TextStyle tabTextStyleSelected =
@@ -102,6 +111,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
+         onGenerateRoute: Application.router.generator,
       ),
     );
   }
