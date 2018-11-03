@@ -57,7 +57,6 @@ import 'dart:core';
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        print('跳转到详情页');
         Application.router.navigateTo(context, "/detail?id=${Uri.encodeComponent(cellInfo.detailUrl)}&title=${Uri.encodeComponent(cellInfo.title)}");
       },
       child: Container(
