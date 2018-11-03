@@ -4,7 +4,7 @@ class ArticleDetail extends StatelessWidget {
   final String articleId;
   final String title;
 
-  ArticleDetail(@required this.articleId, @required this.title);
+  ArticleDetail( this.articleId,  this.title);
 
   @override
   Widget build(BuildContext context) {

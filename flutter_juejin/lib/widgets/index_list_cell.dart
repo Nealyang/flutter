@@ -5,7 +5,7 @@ import './good_and_comment_cell.dart';
 import '../routers/application.dart';
 import 'dart:core';
 
-class IndexListCell extends StatelessWidget {
+ class IndexListCell extends StatelessWidget {
   final IndexCell cellInfo;
 
   IndexListCell({Key key, this.cellInfo}) : super(key: key);
