@@ -43,6 +43,7 @@ flutter:
   assets:
    - images/logo.png
    - assets/indexListData.json
+   - assets/pins.json
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -30,14 +30,6 @@ class _BookPageState extends State<BookPage> {
                     ]
                   )
                 ),
-                new Tab(
-                  child:new Column(
-                    children:<Widget>[
-                      new Icon(Icons.directions_bike),
-                      new Text('bike')
-                    ]
-                  )
-                ),
               ],
               indicatorColor: Colors.white,
             ),
@@ -46,7 +38,6 @@ class _BookPageState extends State<BookPage> {
             children: [
               new Icon(Icons.directions_car),
               new Icon(Icons.directions_transit),
-              new Icon(Icons.directions_bike),
             ],
           ),
         ),
