@@ -27,11 +27,18 @@ class DataUtils {
   static Future<List<IndexCell>> getIndexListData(
       Map<String, dynamic> params) async {
     var response = await NetUtils.get(Api.RANK_LIST, params: params);
+
     var responseList = response['d']['entrylist'];
+
     List<IndexCell> resultList = new List();
     for (int i = 0; i < responseList.length; i++) {
-      IndexCell cellData = new IndexCell.fromJson(responseList[i]);
-      resultList.add(cellData);
+      try {
+        IndexCell cellData = new IndexCell.fromJson(responseList[i]);
+        resultList.add(cellData);
+      } catch (e) {
+        // No specified type, handles all
+        print('Something really unknown: $i');
+      }
     }
 
     return resultList;

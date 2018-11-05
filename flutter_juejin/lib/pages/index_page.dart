@@ -40,7 +40,6 @@ class _IndexPageState extends State<IndexPage> {
     }
     _params['before'] = pageIndexArray[_pageIndex];
     _isRequesting = true;
-    print(_pageIndex);
     DataUtils.getIndexListData(_params).then((result) {
       _pageIndex += 1;
       List<IndexCell> resultList = new List();

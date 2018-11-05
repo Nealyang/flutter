@@ -23,11 +23,15 @@ class IndexCell {
       this.isCollection});
 
   factory IndexCell.fromJson(Map<String, dynamic> json) {
+    String _tag = '';
+    if(json['tags'].length>0){
+      _tag = '${json['tags'][0]['title']}/';
+    }
     return IndexCell(
       hot: json['hot'],
       collectionCount: json['collectionCount'],
       commentCount: json['commentsCount'],
-      tag: json['tags'][0]['title'] + '/' + json['category']['name'],
+      tag: '$_tag${json['category']['name']}',
       username: json['user']['username'],
       createdTime: Util.getTimeDuration(json['createdAt']),
       title: json['title'],
