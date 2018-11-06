@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/index_list_cell.dart';
 import '../util/data_utils.dart';
-import '../model/indexCell.dart';
+import '../model/index_cell.dart';
 import '../widgets/index_list_header.dart';
 import '../constants/constants.dart';
 import '../widgets/load_more.dart';

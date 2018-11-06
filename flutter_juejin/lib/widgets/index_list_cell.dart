@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../model/indexCell.dart';
+import '../model/index_cell.dart';
 import './in_text_dot.dart';
 import './good_and_comment_cell.dart';
 import '../routers/application.dart';
