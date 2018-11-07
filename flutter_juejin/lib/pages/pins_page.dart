@@ -28,6 +28,7 @@ class _PinsPageState extends State<PinsPage> {
   Widget build(BuildContext context) {
     if (_listData.length > 0) {
       return Container(
+        color: Color(0xFFF4F5F5),
         child: PinsListCell(pinsCell: _listData[0]),
       );
     }else{

@@ -10,6 +10,9 @@ class PinsCell {
   int likedCount;
   String createdAt;
   Map<String, dynamic> topic;
+  String url;
+  String urlTitle;
+  String urlPic;
 
   PinsCell(
       {this.commentCount,
@@ -20,7 +23,7 @@ class PinsCell {
       this.pictures,
       this.topic,
       this.uid,
-      this.user});
+      this.user,this.url,this.urlPic,this.urlTitle});
 
   factory PinsCell.fromJson(Map<String, dynamic> json) {
     Map<String, dynamic> user = new Map();
@@ -29,7 +32,7 @@ class PinsCell {
     user['company'] = json['user']['company'];
     user['jobTitle'] = json['user']['jobTitle'];
     user['role'] = json['user']['role'];
-    user['userName'] = json['user']['userName'];
+    user['userName'] = json['user']['username'];
     user['currentUserFollowed'] = json['user']['currentUserFollowed'];
 
     Map<String, dynamic> topic = new Map();
@@ -38,16 +41,6 @@ class PinsCell {
       topic['objectId'] = json['topic']['objectId'];
       topic['title'] = json['topic']['title'];
     }
-
-    // topic['description'] = json['topic']['description'];
-    // topic['icon'] = json['topic']['icon'];
-    // topic['msgsCount'] = json['topic']['msgsCount'];
-    // topic['followersCount'] = json['topic']['followersCount'];
-    // topic['attendersCount'] = json['topic']['attendersCount'];
-    // topic['hotIndex'] = json['topic']['hotIndex'];
-    // topic['createdAt'] = json['topic']['createdAt'];
-    // topic['updatedAt'] = json['topic']['updatedAt'];
-    // topic['latestMsgCreatedAt'] = json['topic']['latestMsgCreatedAt'];
 
     List<String> pics = new List();
     // pics = json['pictures'];_TypeError (type 'List<dynamic>' is not a subtype of type 'List<String>')
@@ -64,6 +57,9 @@ class PinsCell {
         pictures: pics,
         topic: topic,
         uid: json['uid'],
+        url: json['url'],
+        urlPic: json['urlPic'],
+        urlTitle: json['urlTitle'],
         user: user);
   }
 }
