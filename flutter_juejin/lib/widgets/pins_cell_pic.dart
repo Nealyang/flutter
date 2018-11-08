@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+
 class PinsCellPic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
