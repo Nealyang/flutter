@@ -14,7 +14,6 @@ class PinsCellLink extends StatelessWidget {
       width: 100.0,
       child: InkWell(
         onTap: () {
-          print(linkUrl);
            Application.router.navigateTo(context, "/web?url=${Uri.encodeComponent(linkUrl)}&title=${Uri.encodeComponent('掘金沸点')}");
         },
         child: Row(

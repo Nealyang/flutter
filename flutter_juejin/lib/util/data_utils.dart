@@ -11,23 +11,23 @@ class DataUtils {
     return await rootBundle.loadString('assets/pins.json');
   }
 
-  static Future<List<PinsCell>> getPinsListData() async {
-    List<PinsCell> resultList = new List();
-    String jsonString = await _loadPinsListAsset();
-    final jsonResponseList = json.decode(jsonString)['d']['list'];
-    for (int i = 0; i < jsonResponseList.length; i++) {
-      PinsCell pinsCell;
-      try {
-        pinsCell = PinsCell.fromJson(jsonResponseList[i]);
-      } catch (e) {
-        print("error $e at $i");
-        continue;
-      }
-      resultList.add(pinsCell);
-    }
+  // static Future<List<PinsCell>> getPinsListData() async {
+  //   List<PinsCell> resultList = new List();
+  //   String jsonString = await _loadPinsListAsset();
+  //   final jsonResponseList = json.decode(jsonString)['d']['list'];
+  //   for (int i = 0; i < jsonResponseList.length; i++) {
+  //     PinsCell pinsCell;
+  //     try {
+  //       pinsCell = PinsCell.fromJson(jsonResponseList[i]);
+  //     } catch (e) {
+  //       print("error $e at $i");
+  //       continue;
+  //     }
+  //     resultList.add(pinsCell);
+  //   }
 
-    return resultList;
-  }
+  //   return resultList;
+  // }
 
   // 首页列表数据
   static Future<List<IndexCell>> getIndexListData(
@@ -45,6 +45,27 @@ class DataUtils {
         // No specified type, handles all
         print('Something really unknown: $i');
       }
+    }
+
+    return resultList;
+  }
+
+  // 沸点 列表
+
+  static Future<List<PinsCell>> getPinsListData(
+      Map<String, dynamic> params) async {
+    List<PinsCell> resultList = new List();
+    var response = await NetUtils.get(Api.PINS_LIST, params: params);
+    var responseList = response['d']['list'];
+    for (int i = 0; i < responseList.length; i++) {
+      PinsCell pinsCell;
+      try {
+        pinsCell = PinsCell.fromJson(responseList[i]);
+      } catch (e) {
+        print("error $e at $i");
+        continue;
+      }
+      resultList.add(pinsCell);
     }
 
     return resultList;

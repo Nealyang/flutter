@@ -4,6 +4,8 @@ class Api{
   static const String BANNER_STORAGE = 'https://banner-storage-ms.juejin.im/v1/web/page/aanner?position=hero&platform=web&page=0&pageSize=20&src=web';
   // 首页list
   static const String RANK_LIST = 'https://timeline-merger-ms.juejin.im/v1/get_entry_by_rank';
+  // 沸点
+  static const String PINS_LIST = 'https://short-msg-ms.juejin.im/v1/pinList/recommend';
 
   // 沸点
 //   uid: 

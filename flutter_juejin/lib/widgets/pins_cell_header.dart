@@ -13,9 +13,13 @@ class PinsCellHeader extends StatelessWidget {
       color: Color(0xFFB2BAC2),
     );
     if (userInfo['jobTitle'] != '' || userInfo['jobTitle'] != null) {
-      infoList.add(Text(
-        userInfo['jobTitle'],
-        style: defaultStyle,
+      infoList.add(LimitedBox(
+        maxWidth: 100.0,
+        child: Text(
+          userInfo['jobTitle'],
+          style: defaultStyle,
+          overflow: TextOverflow.ellipsis,
+        ),
       ));
     }
     if (userInfo['company'] != '' || userInfo['company'] != null) {
