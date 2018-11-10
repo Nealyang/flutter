@@ -1,5 +1,29 @@
 
 import 'package:flutter/material.dart';
+
+const Map<String,Color> emumMap = const {
+  "Objective-C":Color(0xFF438EFF),
+  "Perl":Color(0xFF0298C3),
+  "Python":Color(0xFF0298C3),
+  "JavaScript":Color(0xFFF1E05A),
+  "PHP":Color(0xFF4F5D95),
+  "R":Color(0xFF188CE7),
+  "Lua":Color(0xFFC22D40),
+  "Scala":Color(0xFF020080),
+  "Swift":Color(0xFFFFAC45),
+  "Kotlin":Color(0xFFF18E33),
+  "Vue":Colors.black,
+  "Ruby":Color(0xFF701617),
+  "Shell":Color(0xFF89E051),
+  "TypeScript":Color(0xFF2B7489),
+  "C++":Color(0xFFF34B7D),
+  "CSS":Color(0xFF563C7C),
+  "Java":Color(0xFFB07219),
+  "C#":Color(0xFF178600),
+  "Go":Color(0xFF375EAB),
+  "Erlang":Color(0xFFB83998),
+  "C":Color(0xFF555555),
+};
 class Util {
 
   static String getTimeDuration(String comTime) {
@@ -28,5 +52,12 @@ class Util {
 
   static double setPercentage( percentage, context){
     return MediaQuery.of(context).size.width * percentage;
+  }
+
+  static Color getLangColor(String language){
+    if(emumMap.containsKey(language)){
+      return emumMap[language];
+    }
+    return Colors.black26;
   }
 }

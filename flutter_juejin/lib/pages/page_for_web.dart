@@ -17,6 +17,6 @@ class PageForWeb extends StatelessWidget {
       withZoom: false,
       withLocalStorage: true,
       withJavascript: true,
-    );;
+    );
   }
 }

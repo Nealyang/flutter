@@ -10,6 +10,10 @@ class Api{
   static const String BOOK_NAV = 'https://xiaoce-timeline-api-ms.juejin.im/v1/getNavList';
   static const String BOOK_LIST = 'https://xiaoce-timeline-api-ms.juejin.im/v1/getListByLastTime';
 
+  // 开源库
+  static const String REPOS_LIST = 'https://repo-ms.juejin.im/v1/getCustomRepos';
+  
+
   // 沸点
 //   uid: 
 // device_id: 
