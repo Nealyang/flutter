@@ -1,4 +1,5 @@
 
+import 'package:flutter/material.dart';
 class Util {
 
   static String getTimeDuration(String comTime) {
@@ -23,5 +24,9 @@ class Util {
       return (nowTime.year - compareTime.year).toString() + '年前';
     }
     return 'time error';
+  }
+
+  static double setPercentage( percentage, context){
+    return MediaQuery.of(context).size.width * percentage;
   }
 }

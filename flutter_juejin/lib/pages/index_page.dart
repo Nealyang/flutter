@@ -26,7 +26,7 @@ class _IndexPageState extends State<IndexPage> {
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
           _scrollController.position.maxScrollExtent) {
-            print('loadMore');
+        print('loadMore');
         getList(true);
       }
     });
@@ -43,15 +43,17 @@ class _IndexPageState extends State<IndexPage> {
     DataUtils.getIndexListData(_params).then((result) {
       _pageIndex += 1;
       List<IndexCell> resultList = new List();
-      if(isLoadMore){
+      if (isLoadMore) {
         resultList.addAll(_listData);
       }
       resultList.addAll(result);
-      setState(() {
-        _listData = resultList;
-        _hasMore = _pageIndex < pageIndexArray.length;
-        _isRequesting = false;
-      });
+      if (this.mounted) {
+        setState(() {
+          _listData = resultList;
+          _hasMore = _pageIndex < pageIndexArray.length;
+          _isRequesting = false;
+        });
+      }
     });
   }
 
@@ -66,13 +68,20 @@ class _IndexPageState extends State<IndexPage> {
   }
 
 // 下拉刷新
-  Future<void> _onRefresh() async{//The RefreshIndicator onRefresh callback must return a Future.
+  Future<void> _onRefresh() async {
+    //The RefreshIndicator onRefresh callback must return a Future.
     _listData.clear();
     setState(() {
       _listData = _listData;
     });
     getList(false);
     return null;
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -87,7 +96,7 @@ class _IndexPageState extends State<IndexPage> {
       child: ListView.builder(
         itemCount: _listData.length + 2, //添加一个header 和 loadMore
         itemBuilder: (context, index) => _renderList(context, index),
-         controller: _scrollController,
+        controller: _scrollController,
       ),
     );
   }

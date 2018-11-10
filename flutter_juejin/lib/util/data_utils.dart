@@ -5,6 +5,8 @@ import 'dart:async' show Future;
 import '../api/api.dart';
 import './net_utils.dart';
 import '../model/pins_cell.dart';
+import '../model/book_cell.dart';
+import '../model/book_nav.dart';
 
 class DataUtils {
   static Future<String> _loadPinsListAsset() async {
@@ -66,6 +68,45 @@ class DataUtils {
         continue;
       }
       resultList.add(pinsCell);
+    }
+
+    return resultList;
+  }
+
+  // 获取小册导航栏
+  static Future<List<BookNav>>  getBookNavData() async{
+    List<BookNav> resultList = [];
+    var response = await NetUtils.get(Api.BOOK_NAV);
+    var responseList = response['d'];
+   for (int i = 0; i < responseList.length; i++) {
+      BookNav bookNav;
+      try {
+        bookNav = BookNav.fromJson(responseList[i]);
+      } catch (e) {
+        print("error $e at $i");
+        continue;
+      }
+      resultList.add(bookNav);
+    }
+
+    return resultList;
+  }
+
+  // 获取小册
+  static Future<List<BookCell>> getBookListData(
+      Map<String, dynamic> params) async {
+    List<BookCell> resultList = new List();
+    var response = await NetUtils.get(Api.BOOK_LIST, params: params);
+    var responseList = response['d'];
+    for (int i = 0; i < responseList.length; i++) {
+      BookCell bookCell;
+      try {
+        bookCell = BookCell.fromJson(responseList[i]);
+      } catch (e) {
+        print("error $e at $i");
+        continue;
+      }
+      resultList.add(bookCell);
     }
 
     return resultList;

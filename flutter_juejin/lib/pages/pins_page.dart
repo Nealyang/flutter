@@ -36,29 +36,36 @@ class _PinsPageState extends State<PinsPage> {
     });
   }
 
-  void getPinsList(bool isLoadMore) {
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
+  void getPinsList(bool isLoadMore) {
     if (_isRequesting || !_hasMore) return;
 
     if (before != '') {
       _params['before'] = before;
     }
-    if(!isLoadMore){
+    if (!isLoadMore) {
       _params['before'] = '';
     }
     _isRequesting = true;
     before = DateTime.now().toString().replaceFirst(RegExp(r' '), 'T') + 'Z';
     DataUtils.getPinsListData(_params).then((resultData) {
       List<PinsCell> resultList = new List();
-      if(isLoadMore){
+      if (isLoadMore) {
         resultList.addAll(_listData);
       }
       resultList.addAll(resultData);
-      setState(() {
-        _listData = resultList;
-        _hasMore = resultData.length != 0;
-        _isRequesting = false;
-      });
+      if (this.mounted) {
+        setState(() {
+          _listData = resultList;
+          _hasMore = resultData.length != 0;
+          _isRequesting = false;
+        });
+      }
     });
   }
 
