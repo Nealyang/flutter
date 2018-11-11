@@ -6,20 +6,19 @@ import '../routers/application.dart';
 import 'dart:core';
 
 class BookListCell extends StatelessWidget {
-
   final BookCell cellData;
   BookListCell({Key key, this.cellData}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-
     final Color accentColor = Theme.of(context).accentColor;
     final Color primaryColor = Colors.blueAccent;
 
     return InkWell(
-      onTap: (){
+      onTap: () {
         String url = "https://juejin.im/book/${cellData.id}";
-Application.router.navigateTo(context,"/web?url=${Uri.encodeComponent(url)}&title=${Uri.encodeComponent(cellData.title)}");
+        Application.router.navigateTo(context,
+            "/web?url=${Uri.encodeComponent(url)}&title=${Uri.encodeComponent(cellData.title)}");
       },
       child: Container(
         padding: EdgeInsets.symmetric(
@@ -48,8 +47,8 @@ Application.router.navigateTo(context,"/web?url=${Uri.encodeComponent(url)}&titl
             ),
             Container(
               width: Util.setPercentage(0.5, context),
-              margin:
-                  EdgeInsets.only(right: Util.setPercentage(0.01, context)), //0.8
+              margin: EdgeInsets.only(
+                  right: Util.setPercentage(0.01, context)), //0.8
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,

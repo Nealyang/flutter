@@ -8,29 +8,13 @@ import '../model/pins_cell.dart';
 import '../model/book_cell.dart';
 import '../model/book_nav.dart';
 import '../model/repos_cell.dart';
+import '../model/activity_cell.dart';
+import '../model/activity_nav.dart';
 
 class DataUtils {
   static Future<String> _loadPinsListAsset() async {
     return await rootBundle.loadString('assets/pins.json');
   }
-
-  // static Future<List<PinsCell>> getPinsListData() async {
-  //   List<PinsCell> resultList = new List();
-  //   String jsonString = await _loadPinsListAsset();
-  //   final jsonResponseList = json.decode(jsonString)['d']['list'];
-  //   for (int i = 0; i < jsonResponseList.length; i++) {
-  //     PinsCell pinsCell;
-  //     try {
-  //       pinsCell = PinsCell.fromJson(jsonResponseList[i]);
-  //     } catch (e) {
-  //       print("error $e at $i");
-  //       continue;
-  //     }
-  //     resultList.add(pinsCell);
-  //   }
-
-  //   return resultList;
-  // }
 
   // 首页列表数据
   static Future<List<IndexCell>> getIndexListData(
@@ -131,5 +115,41 @@ class DataUtils {
     }
 
     return resultList;
+  }
+
+  // 活动城市列表
+  static Future<List<ActivityNav>> getActivityNavList(Map<String,dynamic> params) async{
+    List<ActivityNav> resultList = [];
+    var response = await NetUtils.get(Api.ACTIVITY_CITY,params: params);
+    var responseList = response['d'];
+    for (int i = 0; i < responseList.length; i++) {
+      ActivityNav activityNav;
+      try {
+        activityNav = ActivityNav.fromJson(responseList[i]);
+      } catch (e) {
+        print("error $e at $i");
+        continue;
+      }
+      resultList.add(activityNav);
+    }
+     return resultList;
+  }
+
+  // 活动列表
+    static Future<List<ActivityCell>> getActivityList(Map<String,dynamic> params) async{
+    List<ActivityCell> resultList = [];
+    var response = await NetUtils.get(Api.ACTIVITY_LIST,params: params);
+    var responseList = response['d'];
+    for (int i = 0; i < responseList.length; i++) {
+      ActivityCell activityCell;
+      try {
+        activityCell = ActivityCell.formJson(responseList[i]);
+      } catch (e) {
+        print("error $e at $i");
+        continue;
+      }
+      resultList.add(activityCell);
+    }
+     return resultList;
   }
 }
