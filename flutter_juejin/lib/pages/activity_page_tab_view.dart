@@ -78,6 +78,12 @@ class _ActivityPageTabViewState extends State<ActivityPageTabView> {
   }
 
   @override
+  void dispose() { 
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     if (_cellList.length == 0) {
       return Center(
