@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import '../routers/application.dart';
+import 'dart:core';
+import 'package:fluro/fluro.dart';
 
 class PinsCellPic extends StatelessWidget {
   final List<String> pics;
@@ -6,6 +9,14 @@ class PinsCellPic extends StatelessWidget {
   double _picHeight = 230.0;
 
   PinsCellPic({Key key, this.pics}) : super(key: key);
+
+  String _buildPicsStr() {
+    String picStr = '';
+    pics.forEach((ele) {
+      picStr += '$ele,';
+    });
+    return picStr.substring(0, picStr.length - 1);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +27,16 @@ class PinsCellPic extends StatelessWidget {
       List<Widget> _tempRow = List();
       _tempRow.add(
         Expanded(
-          child: Image.network(
-            pics[i],
-            fit: BoxFit.cover,
-            height: _picHeight,
+          child: InkWell(
+            onTap: () {
+              Application.router.navigateTo(context,
+                  '/swip?pics=${Uri.encodeComponent(_buildPicsStr())}&currentIndex=${i.toString()}',transition: TransitionType.fadeIn);
+            },
+            child: Image.network(
+              pics[i],
+              fit: BoxFit.cover,
+              height: _picHeight,
+            ),
           ),
           flex: 1,
         ),
@@ -32,10 +49,16 @@ class PinsCellPic extends StatelessWidget {
         );
         _tempRow.add(
           Expanded(
-            child: Image.network(
-              pics[i + 1],
-              fit: BoxFit.cover,
-              height: _picHeight,
+            child: InkWell(
+              onTap: () {
+                Application.router.navigateTo(context,
+                    '/swip?pics=${Uri.encodeComponent(_buildPicsStr())}&currentIndex=${i.toString()}');
+              },
+              child: Image.network(
+                pics[i + 1],
+                fit: BoxFit.cover,
+                height: _picHeight,
+              ),
             ),
             flex: 1,
           ),
@@ -49,10 +72,16 @@ class PinsCellPic extends StatelessWidget {
         );
         _tempRow.add(
           Expanded(
-            child: Image.network(
-              pics[i + 2],
-              fit: BoxFit.cover,
-              height: _picHeight,
+            child: InkWell(
+              onTap: () {
+                Application.router.navigateTo(context,
+                   '/swip?pics=${Uri.encodeComponent(_buildPicsStr())}&currentIndex=${i.toString()}');
+              },
+              child: Image.network(
+                pics[i + 2],
+                fit: BoxFit.cover,
+                height: _picHeight,
+              ),
             ),
             flex: 1,
           ),
