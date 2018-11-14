@@ -17,6 +17,8 @@ class Api{
   static const String ACTIVITY_CITY = 'https://event-storage-api-ms.juejin.im/v1/getCityList';
   static const String ACTIVITY_LIST = 'https://event-storage-api-ms.juejin.im/v2/getEventList';
 
+  //登陆
+  static const String LOGIN = 'https://juejin.im/auth/type/phoneNumber';
   
   static const PinsListSubscribed = 'https://short-msg-ms.juejin.im/v1/pinList/dynamic?uid=59be059c5188256c6d77cf2e&device_id=1541234434900&token=eyJhY2Nlc3NfdG9rZW4iOiJPb21uZGIySHJVQXU4b2pnIiwicmVmcmVzaF90b2tlbiI6IlJDdFNCVVIzaWw0Vmx0VGoiLCJ0b2tlbl90eXBlIjoibWFjIiwiZXhwaXJlX2luIjoyNTkyMDAwfQ%3D%3D&src=web&before&limit=30';
 }

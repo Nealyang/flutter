@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:event_bus/event_bus.dart';
 
 import './index_page.dart';
 import './pins_page.dart';
@@ -8,6 +9,9 @@ import './repos_page.dart';
 import './activity_page.dart';
 import '../routers/routes.dart';
 import '../routers/application.dart';
+import '../widgets/login-button.dart';
+import '../event/event-bus.dart';
+import '../event/event-model.dart';
 
 class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
@@ -16,8 +20,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   _MyAppState() {
     final router = new Router();
+    final eventBus = new EventBus();
     Routes.configureRoutes(router);
     Application.router = router;
+    ApplicationEvent.event = eventBus;
   }
 
   final TextStyle tabTextStyleNormal =
@@ -25,6 +31,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   final TextStyle tabTextStyleSelected =
       TextStyle(color: const Color(0xff4d91fd));
   TabController _tabController;
+
+  String _userName = '';
+  String _userPic = '';
+
   // 底部bar
   final List<Tab> _bottomTabs = <Tab>[
     Tab(
@@ -53,6 +63,12 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabController = new TabController(vsync: this, length: _bottomTabs.length);
+    ApplicationEvent.event.on<UserLoginEvent>().listen((event) {
+      setState(() {
+        _userName = event.userName;
+        _userPic = event.userPic;
+      });
+    });
   }
 
   @override
@@ -77,18 +93,10 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             backgroundColor: Colors.white,
             title: Text('Flutter 版 web 掘金'),
             actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    print('登陆');
-                  },
-                  child: Text(
-                    '登陆 . 注册',
-                    style: TextStyle(
-                      color: Theme.of(context).primaryColor,
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w200,
-                    ),
-                  ))
+              LoginButton(
+                userName: _userName,
+                userPic: _userPic,
+              ),
             ],
           ),
           body: TabBarView(
@@ -110,7 +118,7 @@ class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
             ),
           ),
         ),
-         onGenerateRoute: Application.router.generator,
+        onGenerateRoute: Application.router.generator,
       ),
     );
   }

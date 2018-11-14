@@ -9,6 +9,7 @@ import '../widgets/load_more.dart';
 const pageIndexArray = Constants.RANK_BEFORE;
 
 class IndexPage extends StatefulWidget {
+
   _IndexPageState createState() => _IndexPageState();
 }
 
@@ -19,6 +20,10 @@ class _IndexPageState extends State<IndexPage> {
   bool _isRequesting = false; //是否正在请求数据的flag
   bool _hasMore = true;
   ScrollController _scrollController = new ScrollController();
+  bool _isLogin = false;
+
+
+
   @override
   void initState() {
     super.initState();
@@ -30,6 +35,7 @@ class _IndexPageState extends State<IndexPage> {
         getList(true);
       }
     });
+    
   }
 
   getList(bool isLoadMore) {

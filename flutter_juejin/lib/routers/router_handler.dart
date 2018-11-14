@@ -3,6 +3,7 @@ import 'package:fluro/fluro.dart';
 import '../pages/article_detail.dart';
 import '../pages/page_for_web.dart';
 import '../pages/swip_page.dart';
+import '../pages/login.dart';
 
 Handler articleDetailHandler = Handler(
     handlerFunc: (BuildContext context, Map<String, List<String>> params) {
@@ -25,4 +26,9 @@ Handler swipPageHandler = Handler(
   String index = params['currentIndex']?.first;
   print(pics);
   return SwipPage(pics: pics,currentIndex: index,);
+});
+
+Handler loginPageHandler = Handler(
+    handlerFunc: (BuildContext context, Map<String, List<String>> params) {
+  return Login();
 });
