@@ -7,3 +7,6 @@ study flutter
 - web版掘金flutter实现demo
 
 ![img](https://github.com/Nealyang/flutter/blob/master/flutter_juejin/screenshots/juejin.gif?1543198030460)
+
+## [Flutter入门实战：从0到1仿写web版掘金App 教程](https://github.com/Nealyang/flutter/tree/master/flutter_juejin)
+
