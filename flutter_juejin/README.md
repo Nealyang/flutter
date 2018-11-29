@@ -1,4 +1,4 @@
-# flutter_juejin
+# Flutter入门实战：从0到1仿写web版掘金App
 
 ## 小册介绍
 
