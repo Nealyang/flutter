@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
               FlatButton(
                 onPressed: () {
                   if (_userName != '' && _password != '') {
-                    ApplicationEvent.event 
+                    ApplicationEvent.event
                         .fire(UserLoginEvent(_userName,_userPic));
                     Application.router.pop(context);
                   }
