@@ -79,6 +79,7 @@ class _IndexPageState extends State<IndexPage> {
     _listData.clear();
     setState(() {
       _listData = _listData;
+      _hasMore = true;
     });
     getList(false);
     return null;
