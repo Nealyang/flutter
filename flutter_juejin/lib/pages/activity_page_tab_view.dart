@@ -11,7 +11,8 @@ class ActivityPageTabView extends StatefulWidget {
   _ActivityPageTabViewState createState() => _ActivityPageTabViewState();
 }
 
-class _ActivityPageTabViewState extends State<ActivityPageTabView> {
+class _ActivityPageTabViewState extends State<ActivityPageTabView>
+    with AutomaticKeepAliveClientMixin {
   final Map<String, dynamic> _params = {
     "uid": "",
     "client_id": "",
@@ -27,6 +28,12 @@ class _ActivityPageTabViewState extends State<ActivityPageTabView> {
   bool _isRequesting = false;
   ScrollController _scrollController = ScrollController();
 
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
+
+
+  @override
   void initState() {
     super.initState();
     _getList(false);
@@ -45,7 +52,7 @@ class _ActivityPageTabViewState extends State<ActivityPageTabView> {
       _params['pageNum'] = 1;
     }
 
-    _params['cityAlias']=widget.alias;
+    _params['cityAlias'] = widget.alias;
 
     DataUtils.getActivityList(_params).then((resultData) {
       List<ActivityCell> _mergeList = [];
@@ -62,7 +69,7 @@ class _ActivityPageTabViewState extends State<ActivityPageTabView> {
       _params['pageNum'] = _params['pageNum'] + 1;
 
       // 发现有单页数据少于20的情况，当选择城市的时候
-      if(resultData.length<20){
+      if (resultData.length < 20) {
         _getList(true);
       }
     });
@@ -78,13 +85,14 @@ class _ActivityPageTabViewState extends State<ActivityPageTabView> {
   }
 
   @override
-  void dispose() { 
+  void dispose() {
     _scrollController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (_cellList.length == 0) {
       return Center(
         child: CircularProgressIndicator(),

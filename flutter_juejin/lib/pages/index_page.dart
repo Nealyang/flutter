@@ -13,7 +13,7 @@ class IndexPage extends StatefulWidget {
   _IndexPageState createState() => _IndexPageState();
 }
 
-class _IndexPageState extends State<IndexPage> {
+class _IndexPageState extends State<IndexPage> with AutomaticKeepAliveClientMixin{
   List<IndexCell> _listData = new List();
   int _pageIndex = 0;
   Map<String, dynamic> _params = {"src": 'web', "category": "all", "limit": 20};
@@ -22,7 +22,9 @@ class _IndexPageState extends State<IndexPage> {
   ScrollController _scrollController = new ScrollController();
   bool _isLogin = false;
 
-
+  @override
+    // TODO: implement wantKeepAlive
+    bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -93,6 +95,7 @@ class _IndexPageState extends State<IndexPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (_listData.length == 0) {
       return Center(
         child: CircularProgressIndicator(),

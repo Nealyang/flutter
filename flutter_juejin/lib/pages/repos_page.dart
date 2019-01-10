@@ -10,13 +10,17 @@ class ReposPage extends StatefulWidget {
   _ReposPageState createState() => _ReposPageState();
 }
 
-class _ReposPageState extends State<ReposPage> {
+class _ReposPageState extends State<ReposPage> with AutomaticKeepAliveClientMixin{
   List<ReposCell> _listData = <ReposCell>[];
   int _indexPage = 0;
   Map<String, dynamic> _params = {"src": 'web', "limit": 20};
   bool _hasMore = true;
   ScrollController _scrollController = ScrollController();
    bool _isRequesting = false;
+
+  @override
+    // TODO: implement wantKeepAlive
+    bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -74,6 +78,7 @@ class _ReposPageState extends State<ReposPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return ListView.builder(
       itemBuilder: _itemBuilder,
       itemCount: _listData.length+2,

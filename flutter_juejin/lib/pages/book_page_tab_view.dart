@@ -10,7 +10,7 @@ class BookPageTabView extends StatefulWidget {
   _BookPageTabViewState createState() => _BookPageTabViewState();
 }
 
-class _BookPageTabViewState extends State<BookPageTabView> {
+class _BookPageTabViewState extends State<BookPageTabView> with AutomaticKeepAliveClientMixin{
   Map<String, dynamic> _params = {
     "uid": '',
     'client_id': '',
@@ -19,6 +19,8 @@ class _BookPageTabViewState extends State<BookPageTabView> {
     'pageNum': 1
   };
   List<BookCell> _bookList = <BookCell>[];
+
+  
 
   getBookList() {
     if (widget.alias == 'all') {
@@ -41,12 +43,17 @@ class _BookPageTabViewState extends State<BookPageTabView> {
     getBookList();
   }
 
+  @override
+    // TODO: implement wantKeepAlive
+    bool get wantKeepAlive => true;
+
   Widget _itemBuilder(context,index){
     return BookListCell(cellData: _bookList[index],);
   }
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (_bookList.length == 0) {
       return Center(
         child: CircularProgressIndicator(),

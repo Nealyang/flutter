@@ -8,7 +8,7 @@ class PinsPage extends StatefulWidget {
   _PinsPageState createState() => _PinsPageState();
 }
 
-class _PinsPageState extends State<PinsPage> {
+class _PinsPageState extends State<PinsPage> with AutomaticKeepAliveClientMixin{
   List<PinsCell> _listData = new List();
 
   Map<String, dynamic> _params = {
@@ -22,6 +22,11 @@ class _PinsPageState extends State<PinsPage> {
   bool _hasMore = true;
   String before = '';
   ScrollController _scrollController = new ScrollController();
+
+
+  @override
+    // TODO: implement wantKeepAlive
+    bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -78,6 +83,7 @@ class _PinsPageState extends State<PinsPage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     if (_listData.length > 0) {
       return Container(
         color: Color(0xFFF4F5F5),
